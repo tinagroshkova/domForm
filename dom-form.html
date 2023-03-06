@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <title>Form made with DOM</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    document.body.style.background = "linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%)";
+    document.body.style.display = "flex";
+    document.body.style.justifyContent = "center";
+    document.body.style.fontFamily = "Roboto, sans-serif";
+
+    let form = document.createElement("form");
+    form.style.width = "40%";
+    form.style.margin = "auto";
+    form.style.padding = "40px 40px 100px 40px";
+    form.style.backgroundColor = "white";
+    document.body.appendChild(form);
+
+    let header = document.createElement("h1");
+    header.innerText = "Test Form";
+    header.style.textAlign = "center";
+    header.style.fontSize = "34px";
+    form.append(header);
+
+    let container1 = function (inputArgs, inners, placeholders) {
+        container1 = document.createElement("div");
+
+        for (let i = 0; i < inputArgs.length; i++) {
+            let label = document.createElement("label");
+
+            label.innerText = inners[i];
+            let input = document.createElement("input");
+            input.className = "input-fields";
+            input.placeholder = placeholders[i];
+            input.type = "text";
+            input.id = inputArgs[i];
+            input.name = inputArgs[i];
+            container1.appendChild(label);
+            container1.appendChild(input);
+        }
+        form.appendChild(container1);
+    };
+
+    container1(["fName", "email", "phone"], ["Full Name", "Email", "Phone Number"], ["Enter Your Full Name", "Enter Your Email", "Enter Your Phone Number"]);
+
+    let container2 = function () {
+        container2 = document.createElement("div");
+        let catLabel = document.createElement("label");
+        catLabel.innerText = "Age";
+        catLabel.className = "category-label";
+        container2.appendChild(catLabel)
+        form.appendChild(container2);
+        
+        for (let i = 0; i < arguments.length; i++) {
+            let br = document.createElement("br");
+            container2.appendChild(br);
+            let input = document.createElement("input");
+            input.className = "input-fields";
+            let label = document.createElement("label");
+            label.className = "radio-labels"
+            input.type = "radio";
+            input.id = `age${i + 1}`;
+            input.name = `age${i + 1}`;
+            input.value = arguments[i];
+            label.for = `age${i + 1}`;
+            label.innerText = arguments[i];
+            
+            container2.appendChild(input);
+            container2.appendChild(label);
+        }
+    }
+    container2(">18", "18-35", "35+");
+
+    let container3 = function () {
+        container3 = document.createElement("div");
+        let catLabel = document.createElement("label");
+        catLabel.innerText = "Education";
+        catLabel.className = "category-label";
+        container3.appendChild(catLabel)
+        form.appendChild(container3);
+        
+        for (let i = 0; i < arguments.length; i++) {
+            let br = document.createElement("br");
+            container3.appendChild(br);
+            
+            let input = document.createElement("input");
+            input.className = "input-fields";
+            let label = document.createElement("label");
+            label.className = "radio-labels";
+            input.type = "checkbox";
+            input.id = `age${i + 1}`;
+            input.name = `age${i + 1}`;
+            input.value = arguments[i];
+            label.for = `age${i + 1}`;
+            label.innerText = arguments[i];
+            container3.appendChild(input);
+            container3.appendChild(label);
+        }
+    }
+    container3("High School", "Some College", "Associate's Degree", "Bachelor's Degree");
+
+
+    let container4 = function(){
+        container4 = document.createElement("div");
+        let label = document.createElement("label");
+        label.for = "appointment";
+        label.innerText= "Appointment Date";
+
+        let input = document.createElement("input");
+        input.type = "date";
+        input.className = "input-fields";
+
+        container4.appendChild(label);
+        container4.appendChild(input);
+
+        form.appendChild(container4);
+    }
+    container4();
+
+    let container5 = function(){
+        container5 = document.createElement("div");
+        let label = document.createElement("label");
+        label.for = "reason";
+        label.innerText = "Reason for Appointment";
+
+        let select = document.createElement("select");
+        select.id = "reason";
+        select.name = "reason";
+        select.style.border = "none";
+        select.style.backgroundColor = "whitesmoke";
+        select.style.height = "40px";
+        select.style.fontSize = "14px";
+        select.style.fontWeight = "600";
+        select.style.margin = "20px";
+
+
+        for (let i = 0; i < arguments.length; i++){
+            let option = document.createElement("option");
+            option.value = `option${i+1}`;
+            option.innerText = arguments[i];
+            select.append(option);  
+        }
+        container5.appendChild(label);
+        container5.appendChild(select);
+        form.appendChild(container5);
+    }
+    container5("Select your reason", "I don't know", "I don't care", "I don't want to tell");
+
+    let container6 = function(){
+        container6 = document.createElement("div");
+        let label = document.createElement("label");
+        label.for = arguments[0];
+        label.innerText = "Message";
+        let textArea = document.createElement("textarea");
+        textArea.className = "input-fields";
+        textArea.name = arguments[0];
+        textArea.id = arguments[0];
+        textArea.cols = "30";
+        textArea.rows = "1";
+        textArea.innerText = "Enter a Message";
+
+        container6.appendChild(label);
+        container6.appendChild(textArea);
+
+        form.appendChild(container6);
+    }
+    container6("message");
+
+    let submitButton = document.createElement("button");
+    submitButton.type = "submit";
+    submitButton.id = "submit";
+    submitButton.value = "Submit"
+    submitButton.innerText = "Submit";
+    submitButton.style.width = "50%";
+    submitButton.style.margin = "auto";
+    submitButton.style.display = "flex";
+    submitButton.style.background = "linear-gradient(90deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%)";
+    submitButton.style.border = "none";
+    submitButton.style.borderRadius = "12px";
+    submitButton.style.height = "50px";
+    submitButton.style.color = "white";
+    submitButton.style.fontSize = "18px";
+    submitButton.style.justifyContent = "center";
+    submitButton.style.alignItems = "center";
+    submitButton.style.marginTop = "50px";
+    form.appendChild(submitButton);
+
+    let divs = document.querySelectorAll("div");
+    divs.forEach(div => {
+        div.style.display = "flex";
+        div.style.flexDirection = "column";
+        div.style.margin = "10px";
+    });
+
+    let labels = document.querySelectorAll("label");
+    labels.forEach(label => {
+        label.style.fontSize = "20px";
+        label.style.fontWeight = "600";
+        label.style.padding = "20px 10px 0 10px";
+    });
+
+    let inputs = document.querySelectorAll(".input-fields");
+    inputs.forEach(input => {
+        input.style.fontSize = "14px";
+        input.style.border = "none";
+        input.style.borderBottom = "2px solid rgb(110, 110, 110, 0.4)";
+        input.style.padding = "30px 0 10px 10px";
+
+    });
+
+    container2.style.display = "block"
+    container3.style.display = "block";
+
+    let radioButtons = document.querySelectorAll(".radio-labels");
+    radioButtons.forEach(button => {
+        button.style.fontSize = "17px";
+    });
+
+    let catLabels = document.querySelectorAll(".category-label");
+    catLabels.forEach(label => {
+        label.style.display = "flex";
+    });
+
+</script>
+
+</html>
